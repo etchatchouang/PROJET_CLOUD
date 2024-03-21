@@ -1,17 +1,10 @@
 "use client"
-import {signIn, signOut, useSession} from "next-auth/react";
+import Navigation from "@/components/navigation";
 
-export default function Home() {
-    const {data: session} = useSession()
+export default async function Home() {
   return (
-   <div>
-     <button onClick={() => signIn()}>Sign in</button>
-       {session ? (
-           <div>
-               <h1>Welcome {session.user?.email}</h1>
-                <button onClick={() => signOut()}>Sign out</button>
-           </div>
-         ) : null}
-   </div>
+      <>
+              <Navigation/>
+      </>
   );
 }

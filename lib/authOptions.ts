@@ -1,5 +1,6 @@
 import CredentialsProvider from "next-auth/providers/credentials"
 import {NextAuthOptions} from "next-auth"
+
 export const authOptions: NextAuthOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     session: {
@@ -8,7 +9,6 @@ export const authOptions: NextAuthOptions = {
     },
     providers: [
         CredentialsProvider({
-            id: "",
             name: "Sign in",
             credentials: {
                 email: {
@@ -18,20 +18,18 @@ export const authOptions: NextAuthOptions = {
                 },
                 password: { label: "Password", type: "password" }
             },
+
             async authorize(credentials) {
 
                 const user1 = {
-                    id: 1,
                     email:"test@sfr.com",
                     password:"test"
                 }
                 const user2 = {
-                    id: 2,
                     email:"test2@sfr.com",
                     password:"test"
                 }
                 const user3 = {
-                    id: 3,
                     email:"test3@sfr.com",
                     password:"test"
                 }
@@ -49,7 +47,7 @@ export const authOptions: NextAuthOptions = {
 
                 return {
                     email: user.email,
-                }
+                } as any
             }
         })
     ],

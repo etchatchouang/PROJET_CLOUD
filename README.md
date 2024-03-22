@@ -1,36 +1,120 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Project Cloud Alexandre Dissi 
 
-## Getting Started
+### Mastere Dev C - 2024
 
-First, run the development server:
+#### 1. Introduction 
+
+Le but de se projet est de mettre en place une plateforme qui permet de creer des machines virtuelles sur le cloud uniquement si l'on est connecté à l'application via un login et un mot de passe.
+
+Pour se faire nous allons utiliser les technologies suivantes :
+
+- Next.js
+- Azure API
+- Tailwind
+- NextAuth.js
+
+#### 2. Prérequis
+
+Apres avoir telecharger le projet au format ZIP sur pepal 
+
+Une fois le projet téléchargé, il faut installer le package manager pnpm que j'ai utilisé pour mon projet :
+Suivre ce tuto :
+
+https://pnpm.io/installation
+
+Il faut ensuite se rendre dans le dossier du projet :
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+cd cloud_exo
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Ensuite il faut installer les dépendances du projet  :
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Cela va installer toutes les dependance necessaire au projet pour fonctionner.
 
-## Learn More
+A la suite de cela creer un fichier environnement a la racine du projet avec la commande suivante
+    
+```bash
+    touch .env
+```
 
-To learn more about Next.js, take a look at the following resources:
+Dans ce fichier .env ajouter les variables d'environnement suivantes :
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+NEXTAUTH_SECRET=
+NEXTAUTH_URL=
+AZURE_CLIENT_ID=
+AZURE_TENANT_ID=
+AZURE_CLIENT_SECRET=
+AZURE_SUBSCRIPTION_ID=
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+Ajouter vos identifiants Azure dans les variables d'environnement.
 
-## Deploy on Vercel
+Pour la variable NEXTAUTH_SECRET vous pouvez generer une clé en utilisant la commande suivante :
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+openssl rand -base64 32
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Copier la clé générée et coller la dans la variable d'environnement NEXTAUTH_SECRET.
+
+Ensuite remplisser la variable NEXTAUTH_URL avec l'url de votre application.
+
+```bash
+NEXTAUTH_URL=http://localhost:3000
+```
+
+#### 3. Lancement du projet
+
+Pour lancer le projet il suffit de taper la commande suivante :
+
+```bash
+pnpm dev
+```
+
+Cela va lancer le projet sur le port 3000.
+
+Pour acceder à l'application il suffit de se rendre sur l'url suivante :
+
+```bash
+http://localhost:3000
+```
+
+#### 4. Fonctionnement de l'application
+
+Une fois sur la plateforme , elle est tres simple d'utilisation.
+Rendez vous sur le bouton login en haut a droite de la page et connectez vous avec un des identifiants suivants :
+
+```bash
+user1 : {
+    email:"test@sfr.com",
+    password:"test",
+    role:"user"
+},
+user2:  {
+    email:"test2@sfr.com",
+    password:"test",
+    role:"freemium"
+},
+user3:  {
+    email:"test3@sfr.com",
+    password:"test",
+    role:"premium"
+}
+```
+
+Les 3 utilisateurs ont des roles differents et ont donc des droits differents sur l'application.
+
+- user1 : Aucun droit il auras donc aucune machine virtuelle de creer et ne pourras en creer aucune
+- user2 : Peut creer une machine virtuelle uniquement (Debian)
+- user3 : Peux creer jusqu'a 3 machines virtuelles (Ubuntu , Windows , Debian)
+
+Vous avez juste besoin de cliquer sur le logo d'une distribution et la plateforme va lancer la creation de la Machine virtuelle.
+Une fenetre de chargement apparaitra et une fois la machine virtuelle creer vos identifiants de connexion vous seront affichés en dessous du logo de la distribution choisie.
+
+Si vous ne vous connecter pas dans les 10 min suivant la creation de la machine virtuelle celle ci sera supprimée automatiquement et les identifiant de connexion ne seront plus valides ni affiché.

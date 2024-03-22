@@ -1,10 +1,12 @@
 "use client"
 import Navigation from "@/components/navigation";
+import Virtual from "@/components/virtual";
 
-export default async function Home() {
+export default function Home() {
   return (
       <>
-              <Navigation/>
+          <Navigation/>
+          <Virtual/>
       </>
   );
 }

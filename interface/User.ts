@@ -1,4 +1,4 @@
-export interface ConfirmedUser {
+export interface UserValided {
         email: string;
         password: string;
         role: string;

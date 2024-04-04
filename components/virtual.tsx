@@ -1,6 +1,6 @@
 import {useSession} from "next-auth/react";
 import {FaDebian, FaUbuntu, FaWindows} from "react-icons/fa6";
-import {ConfirmedUser} from "@/interface/User";
+import {UserValided} from "@/interface/User";
 import {useEffect, useState} from "react";
 import toast from "react-hot-toast";
 import {router} from "next/client";
@@ -36,53 +36,57 @@ export default function Virtual() {
         router.refresh();
     };
 
-    const handleStart = async (param) => {
-        setLoading(true);
+    async function startHandling(param) {
         try {
-            const res = await fetch("/api/vm", {
+            setLoading(true);
+            const response = await fetch("/api/vm", {
                 method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ param })
             });
-            setLoading(false);
-            const data = await res.json();
-            setCredentials(prevState => ({ ...prevState, [param]: {
-                    username: data.resourceGroupName.adminUsername,
-                    password: data.resourceGroupName.adminPassword
-                }}));
-            setResult(true);
-            if (res.ok) {
+            if (response.ok) {
+                const data = await response.json();
+                setCredentials(credentials => ({
+                    ...credentials,
+                    [param]: {
+                        username: data.resourceGroupName.adminUsername,
+                        password: data.resourceGroupName.adminPassword
+                    }
+                }));
+                setResult(true);
                 setTimer(600);
+            } else {
+                console.error("La requête a échoué avec le statut :", response.status);
             }
         } catch (error) {
-            console.error("Ereur de création de la machine virtuelle !", error);
+            console.error("Erreur lors de la création de la machine virtuelle !", error);
+        } finally {
+            setLoading(false);
         }
-    };
+    }
+    
 
     const { data: session } = useSession();
-    const user = session?.user as ConfirmedUser;
+    const user = session?.user as UserValided;
     return (
-        <div className={"h-screen"}>
+        <div className={"h-screen flex flex-col gap-2"}>
             {session ? (
                 <>
                     <div className={"flex flex-row justify-between gap-5 mx-20 mt-20 text-center"}>
                         {user.role === "basic" && (
                             <div className={"w-screen"}>
-                                <h2 className={"text-center text-4xl mt-10"}>Upgrade votre compte pour acceder au
-                                    VM</h2>
+                                <h2 className={"text-center text-4xl mt-10"}>Mettre à jour votre compte pour avoir la machine virtuelle</h2>
                             </div>
                         )}
                         {user.role === "prenium" && (
                             <div>
-                                <FaDebian onClick={() => handleStart("debian-12")}
+                                <FaDebian onClick={() => startHandling("WindowsServer")}
                                           className={"text-[15rem] text-rose-500 cursor-pointer"}/>
                                 <h2>Debian</h2>
-                                {credentials["debian-12"] && ( 
+                                {credentials["WindowsServer"] && ( 
                                     <>
-                                        <h2>Username: {credentials["debian-12"].username}</h2>
-                                        <h2>Password: {credentials["debian-12"].password}</h2>
+                                        <h2>Username: {credentials["WindowsServer"].username}</h2>
+                                        <h2>Password: {credentials["WindowsServer"].password}</h2>
                                     </>
                                 )}
                             </div>
@@ -90,7 +94,7 @@ export default function Virtual() {
                         {user.role === "senior" && (
                             <>
                                 <div>
-                                    <FaDebian onClick={() => handleStart("debian-12")}
+                                    <FaDebian onClick={() => startHandling("debian-12")}
                                               className={"text-[15rem] text-rose-500 cursor-pointer"}/>
                                     <h2>Debian</h2>
                                     {credentials["debian-12"] && ( 
@@ -101,7 +105,7 @@ export default function Virtual() {
                                     )}
                                 </div>
                                 <div>
-                                    <FaUbuntu onClick={() => handleStart("UbuntuServer")}
+                                    <FaUbuntu onClick={() => startHandling("UbuntuServer")}
                                               className={"text-[15rem] text-orange-500 cursor-pointer"}/>
                                     <h2>Ubuntu</h2>
                                     {credentials["UbuntuServer"] && (
@@ -112,7 +116,7 @@ export default function Virtual() {
                                     )}
                                 </div>
                                 <div>
-                                    <FaWindows onClick={() => handleStart("WindowsServer")}
+                                    <FaWindows onClick={() => startHandling("WindowsServer")}
                                                className={"text-[15rem] text-blue-500 cursor-pointer"}/>
                                     <h2>Windows</h2>
                                     {credentials["WindowsServer"] && (

@@ -4,9 +4,9 @@ import Virtual from "@/components/virtual";
 
 export default function Home() {
   return (
-      <>
+      <div>
           <Navigation/>
           <Virtual/>
-      </>
+      </div>
   );
 }

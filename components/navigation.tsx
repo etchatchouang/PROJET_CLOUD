@@ -1,24 +1,23 @@
 import {signIn, signOut, useSession} from "next-auth/react";
-import {ConfirmedUser} from "@/interface/User";
+import {UserValided} from "@/interface/User";
 export default function Navigation() {
     const {data: session} = useSession()
-    const user = session?.user as  ConfirmedUser
+    const user = session?.user as  UserValided
     return (
-        <nav className={"flex flex-row justify-between items-center mx-6 p-5"}>
+        <nav className="mx-6 p-5 flex flex-row items-center justify-between">
             <div>
-                <h1 className={"text-3xl font-bold"}>Cloud Mastere Dev C</h1>
+              <h1 className="text-3xl font-bold">Projet Cloud</h1>
             </div>
             <div>
-                {session ? (
-                    <div className={"flex flex-row items-center gap-5"}>
+             {session ? (
+                 <div className="flex flex-row items-center gap-5">
                         <h1>Welcome {user.email}</h1>
                         <h2>Role: {user.role}</h2>
-                        <button className={"btn btn-error"} onClick={() => signOut()}>Sign out</button>
-                    </div>) : (
-                    <>
-                        <button className={"btn btn-primary"} onClick={() => signIn()}>Sign in</button>
-                    </>
-                )}
+                        <button className="btn btn-error" onClick={signOut}>Sign out</button>
+                    </div>
+                ) : (
+                 <button className="btn btn-primary" onClick={signIn}>Sign in</button>
+              )}
             </div>
         </nav>
     );

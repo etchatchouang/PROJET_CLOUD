@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { createResources } from "@/lib/create-vm";
+import { createResources } from "@/lib/machineStart";
 import { getServerSession } from "next-auth";
 import authOptions from "@/lib/authOptions";
 
@@ -10,9 +10,10 @@ interface ResourceDetails {
 }
 
 const resourceConfig = {
+    
+    "WindowsServer": { version: "2016-Datacenter", description: "MicrosoftWindowsServer" },
     "debian-12": { version: "12", description: "Debian" },
-    "UbuntuServer": { version: "16.04.0-LTS", description: "Canonical" },
-    "WindowsServer": { version: "2016-Datacenter", description: "MicrosoftWindowsServer" }
+    "UbuntuServer": { version: "16.04.0-LTS", description: "Canonical" }
 };
 
 export async function POST(req: Request): Promise<Response> {
@@ -22,13 +23,13 @@ export async function POST(req: Request): Promise<Response> {
         return NextResponse.json({ error: "Unauthorized" });
     }
 
-    const os = JSON.parse(await req.text());
-    const config = resourceConfig[os.param];
+    const system = JSON.parse(await req.text());
+    const config = resourceConfig[system.param];
 
     let resourceGroupName: ResourceDetails | undefined;
 
     if (config) {
-        resourceGroupName = await createResources(os.param, config.version, config.description);
+        resourceGroupName = await createResources(system.param, config.version, config.description);
     }
 
     return NextResponse.json({ resourceGroupName });

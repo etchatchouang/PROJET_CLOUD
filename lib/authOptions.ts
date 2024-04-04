@@ -21,29 +21,29 @@ export const authOptions: NextAuthOptions = {
 
             async authorize(credentials) {
 
-               const confirmedUser = {
-                    user1 : {
-                       email:"test@sfr.com",
-                       password:"test",
-                       role:"user"
-                   },
-                    user2:  {
-                       email:"test2@sfr.com",
-                       password:"test",
-                       role:"freemium"
-                   },
-                    user3:  {
-                       email:"test3@sfr.com",
-                       password:"test",
-                       role:"premium"
-                   }
-               }
+                const confirmedUser = {
+                    basic: {
+                        email: "basic@example.com",
+                        password: "basicPass",
+                        role: "basic"
+                    },
+                    premium: {
+                        email: "premium@example.com",
+                        password: "premiumPass",
+                        role: "premium"
+                    },
+                    senior: {
+                        email: "senior@example.com",
+                        password: "seniorPass",
+                        role: "senior"
+                    }
+                }
 
                 if (!credentials?.email || !credentials.password) {
                     return null
                 }
 
-                const user = await (credentials.email === confirmedUser.user1.email && credentials.password === confirmedUser.user1.password) ? confirmedUser.user1 : (credentials.email === confirmedUser.user2.email && credentials.password === confirmedUser.user2.password) ? confirmedUser.user2 : (credentials.email === confirmedUser.user3.email && credentials.password === confirmedUser.user3.password) ? confirmedUser.user3 : null
+                const user = await (credentials.email === confirmedUser.basic.email && credentials.password === confirmedUser.basic.password) ? confirmedUser.basic : (credentials.email === confirmedUser.premium.email && credentials.password === confirmedUser.premium.password) ? confirmedUser.premium : (credentials.email === confirmedUser.senior.email && credentials.password === confirmedUser.senior.password) ? confirmedUser.senior : null
 
                 if (!user) {
                     return null

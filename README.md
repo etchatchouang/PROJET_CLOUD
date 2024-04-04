@@ -1,120 +1,101 @@
-## Project Cloud Alexandre Dissi 
+## Exo Cloud Emmanuel TCHATCHOUANG
 
-### Mastere Dev C - 2024
+### Thème : Machine Virtuelle
 
-#### 1. Introduction 
+####  Présentation du projet
 
-Le but de se projet est de mettre en place une plateforme qui permet de creer des machines virtuelles sur le cloud uniquement si l'on est connecté à l'application via un login et un mot de passe.
+Ce projet vise à développer une interface permettant la création de machines virtuelles dans le cloud, accessible uniquement après authentification. Les technologies employées comprennent : Tailwind, NextAuth.js, Next.js et Azure API
 
-Pour se faire nous allons utiliser les technologies suivantes :
+####  Installation
 
-- Next.js
-- Azure API
-- Tailwind
-- NextAuth.js
-
-#### 2. Prérequis
-
-Apres avoir telecharger le projet au format ZIP sur pepal 
-
-Une fois le projet téléchargé, il faut installer le package manager pnpm que j'ai utilisé pour mon projet :
-Suivre ce tuto :
+Commencez par télécharger le projet en format Zip via PEPAL, puis installez le gestionnaire de paquets pnpm, Consultez les instructions ici :
 
 https://pnpm.io/installation
 
-Il faut ensuite se rendre dans le dossier du projet :
+Ouvrez ensuite un terminal et accédez au dossier du projet en exécutant :
 
 ```bash
-cd cloud_exo
+cd PROJET_CLOUD
 ```
 
-Ensuite il faut installer les dépendances du projet  :
+Procédez à l'installation des dépendances avec :
 
 ```bash
 pnpm install
 ```
 
-Cela va installer toutes les dependance necessaire au projet pour fonctionner.
-
-A la suite de cela creer un fichier environnement a la racine du projet avec la commande suivante
+Poursuivez en créant un fichier d'environnement à la racine du projet :
     
 ```bash
     touch .env
 ```
 
-Dans ce fichier .env ajouter les variables d'environnement suivantes :
+Dans .env, insérez les variables suivantes :
 
 ```bash
-NEXTAUTH_SECRET=
-NEXTAUTH_URL=
-AZURE_CLIENT_ID=
-AZURE_TENANT_ID=
-AZURE_CLIENT_SECRET=
-AZURE_SUBSCRIPTION_ID=
+NEXTAUTH_SECRET
+NEXTAUTH_URL
+AZURE_CLIENT_ID
+AZURE_TENANT_ID
+AZURE_CLIENT_SECRET
+AZURE_SUBSCRIPTION_ID
 ```
 
-Ajouter vos identifiants Azure dans les variables d'environnement.
-
-Pour la variable NEXTAUTH_SECRET vous pouvez generer une clé en utilisant la commande suivante :
+Remplissez ces variables avec vos informations d'Azure, générez une clé pour NEXTAUTH_SECRET avec :
 
 ```bash
 openssl rand -base64 32
 ```
 
-Copier la clé générée et coller la dans la variable d'environnement NEXTAUTH_SECRET.
-
-Ensuite remplisser la variable NEXTAUTH_URL avec l'url de votre application.
+Copiez la clé générée dans NEXTAUTH_SECRET et complétez NEXTAUTH_URL avec l'URL de l' application :
 
 ```bash
 NEXTAUTH_URL=http://localhost:3000
 ```
 
-#### 3. Lancement du projet
+####  Démarrage de l'application
 
-Pour lancer le projet il suffit de taper la commande suivante :
+Pour démarrer l'application, utilisez la commande :
 
 ```bash
 pnpm dev
 ```
 
-Cela va lancer le projet sur le port 3000.
-
-Pour acceder à l'application il suffit de se rendre sur l'url suivante :
+Ceci lancera le serveur sur le port 3000. Vous pouvez y accéder via :
 
 ```bash
 http://localhost:3000
 ```
 
-#### 4. Fonctionnement de l'application
+####  Utilisation de l'application
 
-Une fois sur la plateforme , elle est tres simple d'utilisation.
-Rendez vous sur le bouton login en haut a droite de la page et connectez vous avec un des identifiants suivants :
+ Cliquez sur le bouton de connexion en haut à droite et authentifiez-vous soit avec basic, prenium ou senior :
+
+bash
+:
 
 ```bash
-user1 : {
-    email:"test@sfr.com",
-    password:"test",
-    role:"user"
+basic: {
+    email: "basic@example.com",
+    password: "basicPass",
+    role: "basic"
 },
-user2:  {
-    email:"test2@sfr.com",
-    password:"test",
-    role:"freemium"
+prenium: {
+    email: "prenium@example.com",
+    password: "premiumPass",
+    role: "prenium"
 },
-user3:  {
-    email:"test3@sfr.com",
-    password:"test",
-    role:"premium"
-}
+senior: {
+    email: "senior@example.com",
+    password: "seniorPass",
+    role: "senior"
+},
 ```
 
-Les 3 utilisateurs ont des roles differents et ont donc des droits differents sur l'application.
+Le champ de possibilité de chaque utilisateur :
 
-- user1 : Aucun droit il auras donc aucune machine virtuelle de creer et ne pourras en creer aucune
-- user2 : Peut creer une machine virtuelle uniquement (Debian)
-- user3 : Peux creer jusqu'a 3 machines virtuelles (Ubuntu , Windows , Debian)
+- basic : Aucun accès à la création de machines virtuelles.
+- prenium : Autorisé à créer une machine virtuelle (Debian).
+- senior : Peut créer jusqu'à trois machines virtuelles (Ubuntu, Windows, Debian).
 
-Vous avez juste besoin de cliquer sur le logo d'une distribution et la plateforme va lancer la creation de la Machine virtuelle.
-Une fenetre de chargement apparaitra et une fois la machine virtuelle creer vos identifiants de connexion vous seront affichés en dessous du logo de la distribution choisie.
-
-Si vous ne vous connecter pas dans les 10 min suivant la creation de la machine virtuelle celle ci sera supprimée automatiquement et les identifiant de connexion ne seront plus valides ni affiché.
+Sélectionnez une distribution pour initier la création d'une machine virtuelle. Un écran de chargement s'affichera et, une fois la machine configurée, les identifiants de connexion apparaîtront, mais ATTENTION ! Si la connexion à la machine virtuelle n'est pas effectuée dans les 10 minutes suivant sa création, elle sera automatiquement supprimée et les identifiants de connexion ne seront plus validés.

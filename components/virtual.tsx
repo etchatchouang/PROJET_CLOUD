@@ -30,7 +30,7 @@ export default function Virtual() {
         await fetch("/api/vm", {
             method: "DELETE"
         });
-        toast.success("La machine virtuelle a été supprimée avec succès");
+        toast.success("Machine virtuelle supprimé !");
         setCredentials({});
         setResult(false);
         router.refresh();
@@ -57,7 +57,7 @@ export default function Virtual() {
                 setTimer(600);
             }
         } catch (error) {
-            console.error("Une erreur s'est produite lors de la création de la machine virtuelle :", error);
+            console.error("Ereur de création de la machine virtuelle !", error);
         }
     };
 
@@ -68,18 +68,18 @@ export default function Virtual() {
             {session ? (
                 <>
                     <div className={"flex flex-row justify-between gap-5 mx-20 mt-20 text-center"}>
-                        {user.role === "user" && (
+                        {user.role === "basic" && (
                             <div className={"w-screen"}>
                                 <h2 className={"text-center text-4xl mt-10"}>Upgrade votre compte pour acceder au
                                     VM</h2>
                             </div>
                         )}
-                        {user.role === "freemium" && (
+                        {user.role === "prenium" && (
                             <div>
                                 <FaDebian onClick={() => handleStart("debian-12")}
                                           className={"text-[15rem] text-rose-500 cursor-pointer"}/>
                                 <h2>Debian</h2>
-                                {credentials["debian-12"] && ( // Affichage des informations uniquement si les informations pour Debian existent
+                                {credentials["debian-12"] && ( 
                                     <>
                                         <h2>Username: {credentials["debian-12"].username}</h2>
                                         <h2>Password: {credentials["debian-12"].password}</h2>
@@ -87,13 +87,13 @@ export default function Virtual() {
                                 )}
                             </div>
                         )}
-                        {user.role === "premium" && (
+                        {user.role === "senior" && (
                             <>
                                 <div>
                                     <FaDebian onClick={() => handleStart("debian-12")}
                                               className={"text-[15rem] text-rose-500 cursor-pointer"}/>
                                     <h2>Debian</h2>
-                                    {credentials["debian-12"] && ( // Affichage des informations uniquement si les informations pour Debian existent
+                                    {credentials["debian-12"] && ( 
                                         <>
                                             <h2>Username: {credentials["debian-12"].username}</h2>
                                             <h2>Password: {credentials["debian-12"].password}</h2>
@@ -128,18 +128,17 @@ export default function Virtual() {
                 </>
             ) : (
                 <>
-                    <h1 className={"text-center mt-10 text-4xl"}>Veuillez vous connecter pour acceder a vos virtual
-                        machine</h1>
+                    <h1 className={"text-center mt-10 text-4xl"}>Page de connexion à la machine virtuelle</h1>
                 </>)}
             {loading && <div className={"fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center"}>
                 <div className={"bg-white p-10 rounded-lg"}>
-                    <h1 className={"text-2xl text-center text-black"}>Creation de la VM en cours<br/> Veuillez patienter
+                    <h1 className={"text-2xl text-center text-black"}>Votre machine virtuelle est en cours de création <br/> Elle sera crée dans quelques instants.
                         ...</h1>
                 </div>
             </div>}
 
             {result && (
-                <h2 className={"mt-20 text-red-600 text-5xl text-center "}>Attention vous avez 10 min avant que la VM ne soit detruit automatiquement</h2>
+                <h2 className={"mt-20 text-red-600 text-5xl text-center "}>Votre machine virtuelle sera détruite automatiquemant dans une dizaine de minute</h2>
             )}
         </div>
     );

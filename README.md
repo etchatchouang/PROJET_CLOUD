@@ -8,7 +8,7 @@ Ce projet vise à développer une interface permettant la création de machines 
 
 ####  Installation
 
-Commencez par télécharger le projet en format Zip via PEPAL, puis installez le gestionnaire de paquets pnpm, Consultez les instructions ici :
+Commencez par télécharger le projet en format Zip via PEPAL, puis installez le gestionnaire de paquets npm, Consultez les instructions ici :
 
 https://npm.io/installation
 

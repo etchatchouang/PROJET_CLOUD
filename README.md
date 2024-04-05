@@ -8,7 +8,7 @@ Ce projet vise à développer une interface permettant la création de machines 
 
 ####  Installation
 
-Commencez par télécharger le projet en format Zip via PEPAL, puis installez le gestionnaire de paquets npm, Consultez les instructions ici :
+Commencez par télécharger le projet en format Zip via le dépot PEPAL, puis installez le gestionnaire de paquets npm, Consultez les instructions ici :
 
 https://npm.io/installation
 
@@ -64,8 +64,8 @@ http://localhost:3000
  Le champ de possibilité de chaque utilisateur :
 
 - basic : Aucun accès à la création de machines virtuelles.
-- prenium : Autorisé à créer une machine virtuelle (Windows).
-- senior : Peut créer jusqu'à trois machines virtuelles (Ubuntu, Windows, Debian).
+- prenium : Autorisé à créer une machine virtuelle Windows uniquement.
+- senior : Peut créer jusqu'à trois machines virtuelles (Windows, Ubuntu et Debian).
  
  Cliquez sur le bouton de connexion en haut à droite et authentifiez-vous soit avec basic, prenium ou senior :
 

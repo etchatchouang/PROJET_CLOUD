@@ -53,7 +53,7 @@ Pour démarrer l'application, utilisez la commande :
 npm dev
 ```
 
-Ceci lancera le serveur sur le port 3000. Vous pouvez y accéder via :
+Ceci lancera le serveur sur le port 3000. Vous pouvez y acceder via :
 
 ```bash
 http://localhost:3000

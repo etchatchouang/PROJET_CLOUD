@@ -10,8 +10,6 @@ if (!clientId || !domain || !secret || !subscriptionId) {
     console.log("Default credentials couldn't be found");
 }
 
-// Call this file with `node cleanup.js <resourceGroupName>`
-// where <resourceGroupName> is the name of the resource group to be deleted
 const resourceGroupName = process.argv[2];
 if (!resourceGroupName) {
     console.log("resourceGroupName couldn't be found");

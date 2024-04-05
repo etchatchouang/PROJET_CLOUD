@@ -10,31 +10,25 @@ const { ResourceManagementClient } = require("@azure/arm-resources");
 const { StorageManagementClient } = require("@azure/arm-storage");
 const { NetworkManagementClient } = require("@azure/arm-network");
 
-// Store function output to be used elsewhere
 let randomIds = {};
 let subnetInfo = null;
 let publicIPInfo = null;
 let vmImageInfo = null;
 let nicInfo = null;
 
-// CHANGE THIS - used as prefix for naming resources
 const yourAlias = "devc";
 
-// CHANGE THIS - used to add tags to resources
 const projectName = "projecttestalexandre";
 
-// Resource configs
 const location = "North Europe";
 const accType = "Standard_LRS";
 
-// Ubuntu config for VM
 const randomNumbers = Math.floor(Math.random() * 90000) + 10000;
 
 const adminUsername = "admin" + randomNumbers as string;
 const adminPassword = "Pa$$w0rd" + randomNumbers as string;
 
 
-// Azure authentication in environment variables for DefaultAzureCredential
 const tenantId =
     process.env["AZURE_TENANT_ID"] || "REPLACE-WITH-YOUR-TENANT-ID";
 const clientId =
@@ -47,15 +41,13 @@ const subscriptionId =
 let credentials = null;
 
 if (process.env.production) {
-    // production
     credentials = new DefaultAzureCredential();
 } else {
-    // development
     credentials = new ClientSecretCredential(tenantId, clientId, secret);
-    console.log("development");
+    console.log("Dev");
 }
 
-// Azure services
+
 const resourceClient = new ResourceManagementClient(
     credentials,
     subscriptionId
@@ -64,7 +56,6 @@ const computeClient = new ComputeManagementClient(credentials, subscriptionId);
 const storageClient = new StorageManagementClient(credentials, subscriptionId);
 const networkClient = new NetworkManagementClient(credentials, subscriptionId);
 
-// Create resources then manage them (on/off)
 export async function createResources(os_machine: string,sku: string, publisher:string) {
     let resourceGroupName;
     try {
@@ -252,7 +243,6 @@ const _generateRandomId = (prefix, existIds) => {
     return newNumber;
 };
 
-//Random number generator for service names and settings
 const resourceGroupName = _generateRandomId(`${yourAlias}-testrg`, randomIds);
 const vmName = (`${yourAlias}vm`);
 const storageAccountName = _generateRandomId(`${yourAlias}ac`, randomIds);

@@ -45,7 +45,7 @@ Copiez la clé générée dans NEXTAUTH_SECRET et complétez NEXTAUTH_URL avec l
 NEXTAUTH_URL=http://localhost:3000
 ```
 
-####  Démarrage de l'application
+####  Démarrage et Utilisation de l'application
 
 Pour démarrer l'application, utilisez la commande :
 
@@ -58,8 +58,6 @@ Ceci lancera le serveur sur le port 3000. Vous pouvez y acceder via :
 ```bash
 http://localhost:3000
 ```
-
-####  Utilisation de l'application
 
  Le champ de possibilité de chaque utilisateur :
 

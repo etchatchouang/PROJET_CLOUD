@@ -69,10 +69,10 @@ export default function Virtual() {
     const { data: session } = useSession();
     const user = session?.user as UserValided;
     return (
-        <div className={"h-screen flex flex-col gap-2"}>
+        <div className={"h-screen"}>
             {session ? (
                 <>
-                    <div className={"flex flex-row justify-between gap-5 mx-20 mt-20 text-center"}>
+                    <div className={"flex flex-col mx-auto items-center gap-5 mt-20"}>
                         {user.role === "basic" && (
                             <div className={"w-screen"}>
                                 <h2 className={"text-center text-4xl mt-10"}>Mettre à jour votre compte pour avoir la machine virtuelle</h2>
@@ -81,7 +81,7 @@ export default function Virtual() {
                         {user.role === "prenium" && (
                             <div>
                                 <FaDebian onClick={() => startHandling("WindowsServer")}
-                                          className={"text-[15rem] text-rose-500 cursor-pointer"}/>
+                                          className={"text-6xl text-rose-500 cursor-pointer"}/>
                                 <h2>Debian</h2>
                                 {credentials["WindowsServer"] && ( 
                                     <>
@@ -95,7 +95,7 @@ export default function Virtual() {
                             <>
                                 <div>
                                     <FaDebian onClick={() => startHandling("debian-12")}
-                                              className={"text-[15rem] text-rose-500 cursor-pointer"}/>
+                                              className={"text-6xl text-rose-500 cursor-pointer"}/>
                                     <h2>Debian</h2>
                                     {credentials["debian-12"] && ( 
                                         <>
@@ -106,7 +106,7 @@ export default function Virtual() {
                                 </div>
                                 <div>
                                     <FaUbuntu onClick={() => startHandling("UbuntuServer")}
-                                              className={"text-[15rem] text-orange-500 cursor-pointer"}/>
+                                              className={"text-6xl text-orange-500 cursor-pointer"}/>
                                     <h2>Ubuntu</h2>
                                     {credentials["UbuntuServer"] && (
                                         <>
@@ -117,7 +117,7 @@ export default function Virtual() {
                                 </div>
                                 <div>
                                     <FaWindows onClick={() => startHandling("WindowsServer")}
-                                               className={"text-[15rem] text-blue-500 cursor-pointer"}/>
+                                               className={"text-6xl text-blue-500 cursor-pointer"}/>
                                     <h2>Windows</h2>
                                     {credentials["WindowsServer"] && (
                                         <>
@@ -142,8 +142,11 @@ export default function Virtual() {
             </div>}
 
             {result && (
-                <h2 className={"mt-20 text-red-600 text-5xl text-center "}>Votre machine virtuelle sera détruite automatiquemant dans une dizaine de minute</h2>
+                <h2 className="mt-20 text-blue-500 text-3xl text-center font-sans">
+                    Votre machine virtuelle sera détruite automatiquement dans une dizaine de minutes
+                </h2>
             )}
+
         </div>
     );
 }

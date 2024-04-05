@@ -11,8 +11,8 @@ export default function Navigation() {
             <div>
              {session ? (
                  <div className="flex flex-row items-center gap-5">
-                        <h1>Welcome {user.email}</h1>
-                        <h2>Role: {user.role}</h2>
+                        <h1>{user.email}</h1>
+                        <h2>{user.role}</h2>
                         <button className="btn btn-error" onClick={signOut}>Sign out</button>
                     </div>
                 ) : (

@@ -90,4 +90,4 @@ senior: {
 },
 ```
 
-Sélectionnez une distribution pour initier la création d'une machine virtuelle. Un écran de chargement s'affichera et, une fois la machine configurée, les identifiants de connexion apparaîtront, mais ATTENTION ! Si la connexion à la machine virtuelle n'est pas effectuée dans les 10 minutes suivant sa création, elle sera automatiquement supprimée et les identifiants de connexion ne seront plus validés.
+Sélectionnez une distribution pour initier la création d'une machine virtuelle. Un écran de chargement s'affichera et, une fois la machine configurée, les identifiants de connexion apparaîtront, mais ATTENTION ! Si la connexion à la machine virtuelle n'est pas effectuée dans les 10 minutes suivant sa création, elle sera automatiquement supprimée.

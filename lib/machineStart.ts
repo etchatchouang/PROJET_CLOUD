@@ -18,7 +18,7 @@ let nicInfo = null;
 
 const yourAlias = "devc";
 
-const projectName = "projecttestalexandre";
+const projectName = "EmmanuelTchatchouang_CloudProject";
 
 const location = "North Europe";
 const accType = "Standard_LRS";
